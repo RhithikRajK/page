@@ -92,31 +92,17 @@
         <div class="projects-grid">
             <div class="project-card">
                 <div class="project-content">
-                    <h3 class="project-title">E-Commerce Analytics Dashboard</h3>
-                    <p class="project-description">A real-time data visualizer tracking online store conversions, traffic spikes, and inventory revenue streams.</p>
-                    <ul class="project-tech">
-                        <li>React</li>
-                        <li>Node.js</li>
-                        <li>Chart.js</li>
-                    </ul>
-                    <div class="project-links">
-                        <a href="#" target="_blank">GitHub</a>
-                        <a href="#" target="_blank">Live Demo</a>
+                    <h3 class="project-title">Agri Bot Maneuvering Video</h3>
+                    <p class="project-description">A short demonstration of the robot platform in action with live motion and control behavior.</p>
+                    <div class="project-video-wrapper">
+                        <video src="bot_video.mp4" controls muted autoplay loop playsinline preload="metadata" class="project-video"></video>
                     </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">AI Content Summarizer</h3>
-                    <p class="project-description">A web tool that parses long-form articles and uses modern language models to provide neat bulleted summaries.</p>
                     <ul class="project-tech">
-                        <li>Python</li>
-                        <li>Flask</li>
-                        <li>OpenAI API</li>
+                        <li>Embedded Control</li>
+                        <li>Bot Movement Demo</li>
                     </ul>
                     <div class="project-links">
-                        <a href="#" target="_blank">GitHub</a>
-                        <a href="#" target="_blank">Live Demo</a>
+                        <a href="https://github.com/RhithikRajK/AgricultureRover-WeedDetection-Removal-CropRecommendation-MobileRobot/tree/main" target="_blank">GitHub</a>
                     </div>
                 </div>
             </div>
@@ -126,11 +112,11 @@
     <section id="contact" class="section section-reveal reveal-pop contact-section">
         <h2 class="section-heading">Get In Touch</h2>
         <p>I'm currently looking for new opportunities! Whether you have a question or just want to say hi, my inbox is always open.</p>
-        <a href="mailto:your.email@example.com" class="btn">Say Hello</a>
+        <a href="mailto:rhithikraj2002@gmail.com" class="btn">Say Hello</a>
     </section>
 
     <footer class="footer">
-        <p>Designed & Built by Your Name &copy; 2026</p>
+        <p>Designed & Built by Rhithik Raj K &copy; 2026</p>
     </footer>
 
     <script>
@@ -236,6 +222,26 @@
             navLogo.addEventListener('pointerleave', resetLogo);
             navLogo.addEventListener('mouseleave', resetLogo);
             navLogo.addEventListener('blur', resetLogo);
+        }
+
+        const demoVideo = document.querySelector('.project-video');
+        if (demoVideo) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach((entry) => {
+                    if (entry.isIntersecting) {
+                        demoVideo.play().catch(() => {});
+                    } else if (!entry.isIntersecting) {
+                        demoVideo.pause();
+                    }
+                });
+            }, {
+                threshold: 0.35,
+                rootMargin: '0px 0px -10% 0px'
+            });
+
+            videoObserver.observe(demoVideo);
+            demoVideo.addEventListener('mouseenter', () => demoVideo.play().catch(() => {}));
+            demoVideo.addEventListener('mouseleave', () => demoVideo.pause());
         }
     </script>
 

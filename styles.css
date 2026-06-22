@@ -425,6 +425,23 @@ body {
     transform: perspective(1000px) rotateX(var(--card-rotate-x, 0deg)) rotateY(var(--card-rotate-y, 0deg)) var(--card-lift, translateY(0) scale(1));
 }
 
+.project-video-wrapper {
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+    margin: 1.5rem 0;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(100, 255, 218, 0.08);
+}
+
+.project-video {
+    width: 100%;
+    height: auto;
+    display: block;
+    max-height: 280px;
+    object-fit: cover;
+}
+
 .project-card:hover {
     --card-lift: translateY(-8px) scale(1.01);
     box-shadow: 0 24px 50px -28px rgba(2, 12, 27, 0.8), 0 0 0 1px rgba(100, 255, 218, 0.12);
