@@ -547,7 +547,6 @@
                         document.body.classList.remove('intro-active');
                         document.body.classList.add('hero-visible');
                     }, 220);
-                    setTimeout(() => bubble.remove(), 1100);
                 };
 
                 bubble.addEventListener('click', openHero);
@@ -566,6 +565,12 @@
                         ticking = true;
                         requestAnimationFrame(() => {
                             const y = window.scrollY || window.pageYOffset;
+                            // auto-reveal hero if scrolling past threshold, even without burst
+                            if (y > 120 && introActive && document.body.classList.contains('intro-active')) {
+                                introActive = false;
+                                document.body.classList.remove('intro-active');
+                                document.body.classList.add('hero-visible');
+                            }
                             if (y > 40 && state === 'centered') moveToNav();
                             else if (y <= 40 && state === 'in-nav') moveToCenter();
                             ticking = false;
@@ -617,6 +622,8 @@
                     state = 'moving';
                     document.body.classList.remove('logo-in-nav');
                     bubble.classList.remove('hidden');
+                    bubble.classList.remove('burst');
+                    introActive = true;
                     freezeCurrentTransform();
                     floating.style.display = '';
                     floating.style.opacity = '1';
