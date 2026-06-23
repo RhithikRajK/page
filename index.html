@@ -4,12 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>RHITHIK RAJ K | Portfolio</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
-<body>
+<body class="intro-active">
+
+    <canvas id="stars" aria-hidden="true"></canvas>
+    <div id="nebula" aria-hidden="true"></div>
+    <canvas id="comets" aria-hidden="true"></canvas>
+    <div id="eclipse" aria-hidden="true"></div>
+    <div id="cursor-trail" aria-hidden="true"></div>
+    <div id="sat-cursor" aria-hidden="true"></div>
 
     <nav class="navbar">
         <div class="nav-container">
@@ -22,6 +30,9 @@
             </ul>
         </div>
     </nav>
+
+    <div id="floating-bubble" role="button" tabindex="0" aria-label="Reveal hero section"></div>
+    <div id="floating-logo" aria-hidden="true">RJ</div>
 
     <header class="hero">
         <div class="hero-content">
@@ -163,6 +174,32 @@
                 heroSection.style.setProperty('--hero-tilt-y', `${y}deg`);
             };
 
+            const updateEclipsePosition = () => {
+                const heroHeight = heroSection.offsetHeight;
+                const scrollWithinHero = Math.max(0, Math.min(window.scrollY, heroHeight));
+                const progress = Math.min(scrollWithinHero / (heroHeight * 0.85), 1);
+                const maxShift = window.innerWidth + 600; // ensures it exits to the right
+                const translate = progress * maxShift;
+                const scaleX = 1 + progress * 6.0; // stretch horizontally
+                const scaleY = Math.max(0.06, 1 - progress * 0.94); // squash vertically
+                const radius = 20 + (240 * (1 - progress)); // px, from large circle to small pill
+
+                heroSection.style.setProperty('--eclipse-translate', `${translate}px`);
+                heroSection.style.setProperty('--eclipse-scaleX', scaleX);
+                heroSection.style.setProperty('--eclipse-scaleY', scaleY);
+                heroSection.style.setProperty('--eclipse-radius', `${radius}px`);
+
+                if (progress >= 0.995) {
+                    if (!document.body.classList.contains('eclipse-exited')) {
+                        document.body.classList.add('eclipse-exited');
+                    }
+                } else {
+                    if (document.body.classList.contains('eclipse-exited')) {
+                        document.body.classList.remove('eclipse-exited');
+                    }
+                }
+            };
+
             heroSection.addEventListener('pointermove', handleHeroMotion);
             heroSection.addEventListener('mousemove', handleHeroMotion);
 
@@ -170,6 +207,10 @@
                 heroSection.style.setProperty('--hero-tilt-x', '0deg');
                 heroSection.style.setProperty('--hero-tilt-y', '0deg');
             });
+
+            window.addEventListener('scroll', () => requestAnimationFrame(updateEclipsePosition), { passive: true });
+            window.addEventListener('resize', () => requestAnimationFrame(updateEclipsePosition));
+            updateEclipsePosition();
         }
 
         const applyCardTilt = (card, event) => {
@@ -262,6 +303,533 @@
             demoVideo.addEventListener('mouseenter', () => demoVideo.play().catch(() => {}));
             demoVideo.addEventListener('mouseleave', () => demoVideo.pause());
         }
+
+        /* Persistent eclipse section-driven animation */
+        (function() {
+            const eclipse = document.getElementById('eclipse');
+            const sectionsAll = Array.from(document.querySelectorAll('section'));
+
+            const clamp = (v, a=0, b=1) => Math.max(a, Math.min(b, v));
+            const lerp = (a, b, t) => a + (b - a) * t;
+
+            const presets = {
+                hero: () => ({ x: window.innerWidth * 0.72, y: window.innerHeight * 0.35, w: 520, h: 520, border: 12, opacity: 1, scaleX: 1, scaleY:1, radius: '50%' }),
+                about: () => ({ x: window.innerWidth * 0.88, y: window.innerHeight * 0.42, w: 640, h: 260, border: 10, opacity: 0.95, scaleX: 2.2, scaleY:0.36, radius: '22%' }),
+                experience: () => ({ x: window.innerWidth * 1.15, y: window.innerHeight * 0.5, w: 1100, h: 120, border: 10, opacity: 0.7, scaleX: 5, scaleY:0.08, radius: '12px' }),
+                projects: () => ({ x: window.innerWidth * 0.55, y: window.innerHeight * 0.6, w: 560, h: 560, border: 14, opacity: 1, scaleX:1, scaleY:1, radius:'50%' }),
+                contact: () => ({ x: window.innerWidth * 0.95, y: window.innerHeight * 0.8, w: 700, h: 180, border: 12, opacity: 0.9, scaleX:2.6, scaleY:0.24, radius:'18%' })
+            };
+
+            const getPresetFor = (id) => (presets[id] || presets.hero)();
+
+            let ticking = false;
+
+            function updateEclipse() {
+                ticking = false;
+                const scrollY = window.scrollY;
+                // find current section index based on midpoint of viewport
+                const mid = scrollY + window.innerHeight * 0.45;
+                let idx = 0;
+                for (let i = 0; i < sectionsAll.length; i++) {
+                    const top = sectionsAll[i].offsetTop;
+                    if (mid >= top) idx = i;
+                }
+
+                const current = sectionsAll[idx];
+                const next = sectionsAll[idx + 1] || current;
+                const curTop = current.offsetTop;
+                const curH = current.offsetHeight || window.innerHeight;
+                const progress = clamp((scrollY - curTop) / curH, 0, 1);
+
+                const curPreset = getPresetFor(current.id || 'hero');
+                const nextPreset = getPresetFor(next.id || current.id || 'hero');
+
+                const t = progress;
+                const state = {
+                    x: lerp(curPreset.x, nextPreset.x, t),
+                    y: lerp(curPreset.y, nextPreset.y, t),
+                    w: lerp(curPreset.w, nextPreset.w, t),
+                    h: lerp(curPreset.h, nextPreset.h, t),
+                    border: lerp(curPreset.border, nextPreset.border, t),
+                    opacity: lerp(curPreset.opacity, nextPreset.opacity, t),
+                    scaleX: lerp(curPreset.scaleX, nextPreset.scaleX, t),
+                    scaleY: lerp(curPreset.scaleY, nextPreset.scaleY, t),
+                    radius: t < 0.5 ? curPreset.radius : nextPreset.radius
+                };
+
+                // apply
+                eclipse.style.left = `${state.x}px`;
+                eclipse.style.top = `${state.y}px`;
+                eclipse.style.width = `${state.w}px`;
+                eclipse.style.height = `${state.h}px`;
+                eclipse.style.borderWidth = `${Math.max(1, Math.round(state.border))}px`;
+                eclipse.style.opacity = `${state.opacity}`;
+                eclipse.style.borderRadius = state.radius;
+                eclipse.style.transform = `translate(-50%,-50%) scaleX(${state.scaleX}) scaleY(${state.scaleY})`;
+            }
+
+            function requestUpdate() {
+                if (!ticking) {
+                    ticking = true;
+                    requestAnimationFrame(updateEclipse);
+                }
+            }
+
+            window.addEventListener('scroll', requestUpdate, { passive: true });
+            window.addEventListener('resize', () => { Object.keys(presets).forEach(k => presets[k]()); requestUpdate(); }, { passive: true });
+            // initial
+            requestUpdate();
+        })();
+
+        /* Starfield background animation (two layers + parallax) */
+        (function() {
+            const canvas = document.getElementById('stars');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let bgStars = [];
+            let fgStars = [];
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+            let dpr = window.devicePixelRatio || 1;
+
+            function resize() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.max(1, Math.floor(w * dpr));
+                canvas.height = Math.max(1, Math.floor(h * dpr));
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+                createStars();
+            }
+
+            function createStars() {
+                bgStars = [];
+                fgStars = [];
+                const area = w * h;
+                const bgCount = Math.min(1200, Math.floor(area / 4000));
+                const fgCount = Math.min(220, Math.floor(area / 16000));
+
+                for (let i = 0; i < bgCount; i++) {
+                    bgStars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.9 + 0.05, phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.02 + 0.002 });
+                }
+                for (let i = 0; i < fgCount; i++) {
+                    fgStars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.6 + 0.8, a: Math.random() * 0.9 + 0.2, phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.02 + 0.005, hue: Math.random() * 40 - 10 });
+                }
+            }
+
+            let running = true;
+            function render() {
+                if (!running) return;
+                ctx.clearRect(0, 0, w, h);
+                const t = performance.now() * 0.001;
+                const scrollParallax = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight));
+                const bgOffsetX = (scrollParallax - 0.5) * 40; // subtle horizontal parallax
+
+                // background stars (faint)
+                for (let i = 0; i < bgStars.length; i++) {
+                    const s = bgStars[i];
+                    s.phase += s.speed * 0.6;
+                    const flicker = 0.6 + 0.4 * Math.sin(s.phase + t * s.speed * 4);
+                    const alpha = Math.max(0, Math.min(1, s.a * flicker * 0.85));
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(220,220,255,${alpha})`;
+                    ctx.arc(s.x + bgOffsetX * (s.r * 0.4), s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                // foreground stars (bigger, slightly colored)
+                for (let i = 0; i < fgStars.length; i++) {
+                    const s = fgStars[i];
+                    s.phase += s.speed * 0.4;
+                    const flicker = 0.55 + 0.45 * Math.sin(s.phase + t * s.speed * 3.5);
+                    const alpha = Math.max(0, Math.min(1, s.a * flicker));
+                    ctx.beginPath();
+                    const hue = 10 + (s.hue || 0);
+                    ctx.fillStyle = `hsla(${hue}, 90%, 75%, ${alpha})`;
+                    ctx.arc(s.x + bgOffsetX * (s.r * 0.65), s.y, s.r, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+
+                requestAnimationFrame(render);
+            }
+
+            window.addEventListener('resize', () => { resize(); });
+            window.addEventListener('visibilitychange', () => { running = document.visibilityState === 'visible'; if (running) requestAnimationFrame(render); });
+            resize();
+            requestAnimationFrame(render);
+        })();
+
+        /* Satellite cursor: draw SVG and animate smoothly to pointer */
+        (function() {
+            const sat = document.getElementById('sat-cursor');
+            if (!sat) return;
+
+            // inline SVG for a simple satellite icon
+            sat.innerHTML = `
+                <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                    <g fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="26" y="16" width="12" height="10" rx="2" fill="#fff" opacity="0.98"/>
+                        <rect x="10" y="26" width="44" height="6" rx="2" fill="#bfbfbf" opacity="0.22"/>
+                        <circle cx="32" cy="21" r="3" fill="#000" opacity="0.14"/>
+                        <path d="M22 14 L14 8" stroke="#fff"/>
+                        <path d="M42 14 L50 8" stroke="#fff"/>
+                    </g>
+                </svg>`;
+
+            let targetX = window.innerWidth / 2;
+            let targetY = window.innerHeight / 2;
+            let x = targetX, y = targetY;
+            let vx = 0, vy = 0;
+
+            const ease = 0.18;
+            const rotateFactor = 6; // rotation based on pointer velocity
+
+            window.addEventListener('pointermove', (e) => {
+                targetX = e.clientX;
+                targetY = e.clientY;
+            }, { passive: true });
+
+            // keep cursor visible on keyboard focus (for accessibility)
+            window.addEventListener('keydown', (e) => {
+                sat.style.opacity = 1;
+            });
+
+            function animate() {
+                const dx = targetX - x;
+                const dy = targetY - y;
+                vx += dx * ease;
+                vy += dy * ease;
+                vx *= 0.8;
+                vy *= 0.8;
+                x += vx;
+                y += vy;
+
+                const speed = Math.sqrt(vx*vx + vy*vy);
+                const rot = Math.min(30, speed * rotateFactor);
+
+                sat.style.transform = `translate(${x}px, ${y}px) rotate(${rot}deg)`;
+
+                requestAnimationFrame(animate);
+            }
+
+            requestAnimationFrame(animate);
+        })();
+
+            /* Floating logo -> nav transition */
+            (function(){
+                const floating = document.getElementById('floating-logo');
+                const bubble = document.getElementById('floating-bubble');
+                const navLogo = document.querySelector('.nav-logo');
+                const heroSection = document.querySelector('.hero');
+                if (!floating || !bubble || !navLogo || !heroSection) return;
+
+                let state = 'centered'; // 'centered' or 'in-nav' or 'moving'
+                let hasBurst = false;
+                let introActive = true;
+                floating.classList.add('centered');
+                document.body.classList.remove('logo-in-nav');
+
+                const initialTransform = () => {
+                    floating.style.transition = '';
+                    floating.style.transform = 'translate(-50%, -50%) scale(1)';
+                    floating.style.opacity = '1';
+                };
+
+                const openHero = () => {
+                    if (!introActive) return;
+                    introActive = false;
+                    bubble.classList.add('burst');
+                    bubble.classList.add('hidden');
+                    spawnGlassShards(window.innerWidth / 2, window.innerHeight / 2, 22);
+                    setTimeout(() => {
+                        document.body.classList.remove('intro-active');
+                        document.body.classList.add('hero-visible');
+                    }, 220);
+                    setTimeout(() => bubble.remove(), 1100);
+                };
+
+                bubble.addEventListener('click', openHero);
+                bubble.addEventListener('keydown', (event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                        event.preventDefault();
+                        openHero();
+                    }
+                });
+
+                initialTransform();
+
+                let ticking = false;
+                function onScroll() {
+                    if (!ticking) {
+                        ticking = true;
+                        requestAnimationFrame(() => {
+                            const y = window.scrollY || window.pageYOffset;
+                            if (y > 40 && state === 'centered') moveToNav();
+                            else if (y <= 40 && state === 'in-nav') moveToCenter();
+                            ticking = false;
+                        });
+                    }
+                }
+
+                function freezeCurrentTransform() {
+                    const computed = getComputedStyle(floating).transform;
+                    floating.style.transition = 'none';
+                    floating.style.transform = computed;
+                    void floating.offsetWidth;
+                }
+
+                function moveToNav(){
+                    state = 'moving';
+                    floating.classList.remove('centered');
+                    bubble.classList.add('hidden');
+                    const navRect = navLogo.getBoundingClientRect();
+                    const targetX = navRect.left + navRect.width / 2;
+                    const targetY = navRect.top + navRect.height / 2;
+                    const centerX = window.innerWidth / 2;
+                    const centerY = window.innerHeight / 2;
+                    const dx = targetX - centerX;
+                    const dy = targetY - centerY;
+                    const scale = Math.min(1, (navRect.width / floating.getBoundingClientRect().width) * 0.9);
+
+                    freezeCurrentTransform();
+                    floating.style.transition = 'transform 920ms cubic-bezier(0.25, 0.8, 0.35, 1), opacity 260ms ease';
+                    floating.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${scale})`;
+
+                    const onEnd = (event) => {
+                        if (event.propertyName !== 'transform') return;
+                        floating.removeEventListener('transitionend', onEnd);
+                        floating.style.opacity = '0';
+                        document.body.classList.add('logo-in-nav');
+                        if (!hasBurst) {
+                            hasBurst = true;
+                            const r = navLogo.getBoundingClientRect();
+                            spawnLogoBurst(r.left + r.width / 2, r.top + r.height / 2, 18, 14);
+                        }
+                        state = 'in-nav';
+                    };
+
+                    floating.addEventListener('transitionend', onEnd);
+                }
+
+                function moveToCenter(){
+                    state = 'moving';
+                    document.body.classList.remove('logo-in-nav');
+                    bubble.classList.remove('hidden');
+                    freezeCurrentTransform();
+                    floating.style.display = '';
+                    floating.style.opacity = '1';
+                    floating.style.transition = 'transform 920ms cubic-bezier(0.25, 0.8, 0.35, 1), opacity 260ms ease';
+                    floating.style.transform = 'translate(-50%, -50%) scale(1)';
+
+                    const onEnd = (event) => {
+                        if (event.propertyName !== 'transform') return;
+                        floating.removeEventListener('transitionend', onEnd);
+                        floating.classList.add('centered');
+                        state = 'centered';
+                    };
+
+                    floating.addEventListener('transitionend', onEnd);
+                }
+
+                function spawnLogoBurst(x, y, baseDist = 32, count = 16){
+                    const container = document.createElement('div');
+                    container.className = 'logo-burst';
+                    document.body.appendChild(container);
+                    for (let i = 0; i < count; i++) {
+                        const d = document.createElement('div');
+                        d.className = 'burst-dot';
+                        const angle = Math.random() * Math.PI * 2;
+                        const dist = baseDist + Math.random() * baseDist;
+                        const tx = Math.cos(angle) * dist;
+                        const ty = Math.sin(angle) * dist - (Math.random() * 10);
+                        d.style.left = (x - 6) + 'px';
+                        d.style.top = (y - 6) + 'px';
+                        container.appendChild(d);
+                        requestAnimationFrame(() => {
+                            d.style.transform = `translate(${tx}px, ${ty}px) scale(${0.4 + Math.random() * 1.0})`;
+                            d.style.opacity = '0';
+                        });
+                    }
+                    setTimeout(() => { document.body.removeChild(container); }, 900);
+                }
+
+                function spawnGlassShards(x, y, count = 20){
+                    const container = document.createElement('div');
+                    container.className = 'logo-burst';
+                    document.body.appendChild(container);
+                    for (let i = 0; i < count; i++) {
+                        const shard = document.createElement('div');
+                        shard.className = 'shard-piece';
+                        const w = 12 + Math.random() * 24;
+                        const h = 14 + Math.random() * 42;
+                        shard.style.width = `${w}px`;
+                        shard.style.height = `${h}px`;
+                        shard.style.left = `${x - w / 2}px`;
+                        shard.style.top = `${y - h / 2}px`;
+                        shard.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        const opacity = 0.45 + Math.random() * 0.4;
+                        shard.style.opacity = opacity;
+                        shard.style.background = `linear-gradient(${120 + Math.random() * 40}deg, rgba(255,255,255,0.95), rgba(255,255,255,0.12) 68%)`;
+                        shard.style.border = `1px solid rgba(255,255,255,${0.5 + Math.random() * 0.2})`;
+                        container.appendChild(shard);
+
+                        const angle = Math.random() * Math.PI * 2;
+                        const distance = 80 + Math.random() * 140;
+                        const tx = Math.cos(angle) * distance;
+                        const ty = Math.sin(angle) * distance + 40;
+                        const rotation = 25 + Math.random() * 120;
+                        const scale = 0.35 + Math.random() * 0.85;
+
+                        requestAnimationFrame(() => {
+                            shard.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotation}deg) scale(${scale})`;
+                            shard.style.opacity = '0';
+                        });
+                    }
+                    setTimeout(() => { document.body.removeChild(container); }, 1200);
+                }
+
+                window.addEventListener('scroll', onScroll, { passive: true });
+                window.addEventListener('resize', () => {
+                    if (state === 'in-nav') {
+                        document.body.classList.add('logo-in-nav');
+                        floating.style.opacity = '0';
+                    }
+                }, { passive: true });
+            })();
+
+        /* Cursor trail: small fading particles behind the satellite */
+        (function(){
+            const trailContainer = document.getElementById('cursor-trail');
+            if (!trailContainer) return;
+            const dots = [];
+
+            window.addEventListener('pointermove', (e) => {
+                const d = document.createElement('div');
+                d.className = 'trail-dot';
+                d.style.left = e.clientX + 'px';
+                d.style.top = e.clientY + 'px';
+                trailContainer.appendChild(d);
+
+                const life = 900 + Math.random() * 400;
+                const start = performance.now();
+
+                function animateDot(ts){
+                    const age = ts - start;
+                    const t = Math.min(1, age / life);
+                    // drift outward slightly
+                    const dx = (Math.random() - 0.5) * 24 * t;
+                    const dy = (Math.random() - 0.5) * 24 * t + t * 8;
+                    d.style.transform = `translate(${dx}px, ${dy}px) scale(${1 - 0.4 * t})`;
+                    d.style.opacity = String(1 - t);
+                    if (t < 1) requestAnimationFrame(animateDot);
+                    else d.remove();
+                }
+
+                requestAnimationFrame(animateDot);
+            }, { passive: true });
+        })();
+
+        /* Comets layer and subtle section parallax */
+        (function(){
+            const canvas = document.getElementById('comets');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            let w = window.innerWidth;
+            let h = window.innerHeight;
+            let dpr = window.devicePixelRatio || 1;
+            let comets = [];
+            let lastSpawn = 0;
+
+            function resize() {
+                w = window.innerWidth;
+                h = window.innerHeight;
+                dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.max(1, Math.floor(w * dpr));
+                canvas.height = Math.max(1, Math.floor(h * dpr));
+                canvas.style.width = w + 'px';
+                canvas.style.height = h + 'px';
+                ctx.setTransform(dpr,0,0,dpr,0,0);
+            }
+
+            function spawnComet() {
+                const side = Math.random() < 0.5 ? -1 : 1; // left or right
+                const y = Math.random() * h * 0.7 + h * 0.05;
+                const speed = 800 + Math.random() * 1000; // px/sec
+                const angle = (Math.random() * 0.35 + 0.05) * (side * -1); // slightly downward
+                const vx = speed * Math.cos(angle) * (side * -1);
+                const vy = speed * Math.sin(angle);
+                const length = 80 + Math.random() * 220;
+                comets.push({ x: side < 0 ? -100 : w + 100, y, vx, vy, length, life: 0, maxLife: 3000 + Math.random()*1600 });
+            }
+
+            function update(dt){
+                for (let i = comets.length-1; i >=0; i--) {
+                    const c = comets[i];
+                    c.x += c.vx * dt;
+                    c.y += c.vy * dt;
+                    c.life += dt*1000;
+                    if (c.x < -600 || c.x > w + 600 || c.y > h + 600 || c.life > c.maxLife) comets.splice(i,1);
+                }
+            }
+
+            function render(){
+                ctx.clearRect(0,0,w,h);
+                ctx.globalCompositeOperation = 'lighter';
+                for (let i = 0; i < comets.length; i++){
+                    const c = comets[i];
+                    const t = Math.max(0, 1 - c.life / c.maxLife);
+                    const grad = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * 0.02, c.y - c.vy * 0.02);
+                    grad.addColorStop(0, `rgba(255,255,255,${0.95*t})`);
+                    grad.addColorStop(0.4, `rgba(255,180,160,${0.6*t})`);
+                    grad.addColorStop(1, `rgba(255,80,60,${0.0})`);
+                    ctx.strokeStyle = grad;
+                    ctx.lineWidth = Math.max(1, Math.min(18, c.length * 0.06));
+                    ctx.lineCap = 'round';
+                    ctx.beginPath();
+                    ctx.moveTo(c.x, c.y);
+                    ctx.lineTo(c.x - c.vx * 0.03, c.y - c.vy * 0.03);
+                    ctx.stroke();
+                    // head glow
+                    ctx.beginPath();
+                    ctx.fillStyle = `rgba(255,220,200,${0.9*t})`;
+                    ctx.arc(c.x, c.y, Math.max(2, ctx.lineWidth*0.8), 0, Math.PI*2);
+                    ctx.fill();
+                }
+                ctx.globalCompositeOperation = 'source-over';
+            }
+
+            let lastT = performance.now();
+            function loop(now){
+                const dt = Math.min(0.06, (now - lastT) / 1000);
+                lastT = now;
+                // spawn occasionally
+                if (now - lastSpawn > 800 + Math.random()*2000) { spawnComet(); lastSpawn = now; }
+                update(dt);
+                render();
+                requestAnimationFrame(loop);
+            }
+
+            // subtle parallax for sections
+            const parallaxEls = Array.from(document.querySelectorAll('header.hero, section'));
+            function updateParallax(){
+                const mid = window.innerHeight/2;
+                parallaxEls.forEach((el, i) => {
+                    const depth = (el.dataset.depth ? Number(el.dataset.depth) : (i===0?0.02:0.01));
+                    const rect = el.getBoundingClientRect();
+                    const t = (rect.top - mid);
+                    const y = -(t * depth);
+                    el.style.transform = `translate3d(0, ${y}px, 0)`;
+                });
+            }
+
+            window.addEventListener('resize', () => { resize(); });
+            window.addEventListener('scroll', () => { requestAnimationFrame(updateParallax); }, { passive:true });
+            resize();
+            requestAnimationFrame(loop);
+            requestAnimationFrame(updateParallax);
+        })();
     </script>
 
 </body>
