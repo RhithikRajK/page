@@ -3,467 +3,435 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>RHITHIK RAJ K | Portfolio</title>
+    <title>SpaceInspiredPortfolio</title>
     <link rel="icon" href="favicon.svg" type="image/svg+xml">
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
-<body class="intro-active">
-
-    <canvas id="stars" aria-hidden="true"></canvas>
-    <div id="nebula" aria-hidden="true"></div>
-    <canvas id="comets" aria-hidden="true"></canvas>
-    <div id="eclipse" aria-hidden="true"></div>
+<body>
     <div id="cursor-trail" aria-hidden="true"></div>
     <div id="sat-cursor" aria-hidden="true"></div>
 
     <nav class="navbar">
-        <div class="nav-container">
-            <a href="#" class="nav-logo">RJ</a>
-            <ul class="nav-links">
-                <li><a href="#about">About</a></li>
-                <li><a href="#experience">Experience</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <div id="floating-bubble" role="button" tabindex="0" aria-label="Reveal hero section"></div>
-    <div id="floating-logo" aria-hidden="true">RJ</div>
-    <div id="rocket-layer" aria-hidden="true"></div>
-
-    <header class="hero">
-        <div class="hero-content">
-            <p class="hero-subtitle">Hi, my name is</p>
-            <h1 class="hero-title">RHITHIK RAJ K.</h1>
-            <h2 class="hero-tagline">AI & ROBOTICS ENGINEER</h2>
-            <p class="hero-description">
-                I am passionate about software and hardware development, with a focus on AI and robotics. I enjoy building projects that solve real-world problems and exploring the latest technologies in the field.
-            </p>
-            <a href="#projects" class="btn">View My Work</a>
-        </div>
-    </header>
-
-    <section id="about" class="section section-reveal reveal-left">
-        <h2 class="section-heading">About Me</h2>
-        <div class="about-grid">
-            <div class="about-text">
-                <p>Hello! My interest in technology started back in 2020 when I decided to chose CSE in AI and ROBOTICS as my BTech degree — With a lot of passion to work on software and hardware integration.</p>
-                <p>Fast-forward to today, and I've had the privilege of working at various spaces, building projects that actually solve real-world problems.</p>
-                
-                <h3>Education</h3>
-                <ul class="edu-list">
-                    <li>
-                        <strong>B.Tech. in Computer Science Engineering with specialization in AI and Robotics</strong> <br>
-                        VIT Chennai | 2020 - 2024 | 82%
-                    </li>
-                </ul>
+            <div class="nav-container">
+                <a href="#" class="nav-logo">RJ<span>.</span></a>
             </div>
-            <div class="skills-box">
-                <h3>Core Tech Stack</h3>
-                <ul class="skills-list">
-                    <li>Artificial Intelligence and Machine Learning</li>
-                    <li>Robotics</li>
-                    <li>C and C++</li>
-                    <li>Python</li>
-                    <li>HTML & CSS</li>
-                </ul>
-            </div>
-        </div>
-    </section>
+    </nav>  
 
-    <section id="experience" class="section section-reveal reveal-right">
-        <h2 class="section-heading">Where I've Worked</h2>
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="timeline-date">June 2024 - Dec 2024</div>
-                <div class="timeline-content">
-                    <h3>Computer Vision Intern <span class="company">@ Euler Motors</span></h3>
-                    <p>Worked on ADAS feature called Forward Collision Warning.</p>
-                    <p>Developed Automation systems using camera in Euler Motors Manufacturing Plant.</p>
-                    <p>Developed Carla Simulation of ADAS features using Python and ROS.</p>
+    <div id="space-intro-sentinel"></div>
+    <div id="space-intro" aria-hidden="true">
+        <canvas id="space-bg"></canvas>
+        <div id="space-name-wrap">
+            <div id="space-name-top">RHITHIK RAJ K.</div>
+            <div id="space-name-sub">AI &amp; Robotics Engineer &nbsp;·&nbsp; Computer Vision &nbsp;·&nbsp; ADAS</div>
+            <div id="space-name-line"></div>
+        </div>
+        <div id="scroll-hint">
+            <span>Scroll to explore</span>
+            <svg id="scroll-arrow" viewBox="0 0 24 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="1" y="1" width="22" height="34" rx="11" stroke="rgba(255,255,255,0.35)" stroke-width="1.5"/>
+                <circle id="scroll-dot" cx="12" cy="10" r="3.5" fill="rgba(255,40,40,0.9)"/>
+            </svg>
+        </div>
+    </div>
+
+    <div id="main-content">
+        <canvas id="stars" aria-hidden="true"></canvas>
+        <div id="nebula" aria-hidden="true"></div>
+        <canvas id="comets" aria-hidden="true"></canvas>
+
+
+        <header class="hero">
+            <div class="hero-content hero-grid">
+                <div class="hero-copy">
+                    <p class="hero-subtitle">AI &amp; Robotics Engineer</p>
+                    <h1 class="hero-title">RHITHIK RAJ K<span>.</span></h1>
+                    <h2 class="hero-tagline">Building perception systems for real-world machines.</h2>
+                    <p class="hero-description">
+                        Computer vision specialist creating robust ADAS architectures, autonomous rover steering arrays, and high-speed deep learning pipelines. Bridging pure software intelligence with embedded edge execution.
+                    </p>
+                    <div class="hero-actions">
+                        <a href="#projects" class="btn">Explore Artifacts</a>
+                        <a href="#experience" class="btn btn-secondary">Read Dossier</a>
+                    </div>
+                </div>
+
+                <div class="hero-visual" aria-hidden="true">
+                    <div class="radar-display">
+                        <span class="radar-ring rr-1"></span>
+                        <span class="radar-ring rr-2"></span>
+                        <span class="radar-ring rr-3"></span>
+                        <span class="radar-crosshair-h"></span>
+                        <span class="radar-crosshair-v"></span>
+                        <span class="radar-sweep"></span>
+                        
+                        <div class="radar-target target-1">
+                            <span class="ping"></span><span class="dot"></span>
+                            <span class="target-label">OBJ_042 // ACC</span>
+                        </div>
+                        <div class="radar-target target-2">
+                            <span class="ping"></span><span class="dot"></span>
+                            <span class="target-label">LANE_ERR_0.02m</span>
+                        </div>
+                    </div>
+
+                    <div class="signal-card signal-card-main interactive-card">
+                        <div class="sc-header"><span>SYSTEM_STATUS</span><span class="sc-green">ONLINE</span></div>
+                        <div class="sc-graph"><span class="bar" style="height:65%"></span><span class="bar" style="height:85%"></span><span class="bar" style="height:45%"></span><span class="bar" style="height:95%"></span><span class="bar" style="height:70%"></span></div>
+                    </div>
+                    <div class="signal-card signal-card-small interactive-card">
+                        <div class="sc-header"><span>FPS</span><span>120</span></div>
+                    </div>
+                    <div class="signal-card signal-card-bottom interactive-card">
+                        <div class="sc-header"><span>LATENCY</span><span class="sc-red">4.2ms</span></div>
+                    </div>
                 </div>
             </div>
-            <div class="timeline-item">
-                <div class="timeline-date">Dec 2024 - Present</div>
-                <div class="timeline-content">
-                    <h3>Member of Technical Staff 1 <span class="company">@ Euler Motors</span></h3>
-                    <p>Developed and maintained computer vision algorithms for ADAS systems like Lane Detection.</p>
-                    <p>R&D for building rain detection sensor suit to build automatic wiper systems.</p>
-                    <p>Worked on Night vision systems for improved visibility in low-light conditions.</p>
-                </div>
-        </div>
-        </div>
-    </section>
+        </header>
 
-    <section id="projects" class="section section-reveal reveal-down">
-        <h2 class="section-heading">Some Things I've Built</h2>
-        <div class="projects-grid">
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title">Agri Bot Maneuvering Video</h3>
-                    <p class="project-description">A short demonstration of the robot platform in action with live motion and control behavior.</p>
+        <section id="about" class="section section-reveal reveal-left">
+            <div class="section-header">
+                <span class="section-label">01 </span>
+                <h2 class="section-heading">Biographical Matrix</h2>
+            </div>
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>I'm a Computer Vision and Robotics engineer who bridges the gap between intelligent software and physical hardware. My journey began in 2020 when I chose to specialise in AI and Robotics — driven by a passion to build systems that interact with the real world, not just simulate it.</p>
+                    <p>Today I work full-time at Euler Motors, developing ADAS perception systems deployed in electric vehicles on Indian roads.</p>
+                    <div class="edu-card interactive-card">
+                        <div class="edu-icon">🎓</div>
+                        <div class="edu-body">
+                            <strong>B.Tech — CSE with AI &amp; Robotics</strong>
+                            <span>VIT Chennai &nbsp;·&nbsp; 2020–2024 &nbsp;·&nbsp; CGPA: 8.2</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skills-box interactive-card">
+                    <h3>Core Stacks</h3>
+                    <ul class="skills-list">
+                        <li><span class="skill-tag">Python</span></li>
+                        <li><span class="skill-tag">C / C++</span></li>
+                        <li><span class="skill-tag">OpenCV</span></li>
+                        <li><span class="skill-tag">ROS</span></li>
+                        <li><span class="skill-tag">PyTorch</span></li>
+                        <li><span class="skill-tag">ADAS Architectures</span></li>
+                        <li><span class="skill-tag">Embedded Linux</span></li>
+                        <li><span class="skill-tag">CUDA Optimization</span></li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section section-reveal reveal-right">
+            <div class="section-header">
+                <span class="section-label">02 </span>
+                <h2 class="section-heading">Professional Timeline</h2>
+            </div>
+            <div class="exp-list">
+                <div class="exp-item interactive-card">
+                    <div class="exp-meta">
+                        <span class="exp-period">Dec 2024 — Present</span>
+                        <span class="exp-badge current">ACTIVE DEPLOYMENT</span>
+                    </div>
+                    <div class="exp-body">
+                        <h3>Member of Technical Staff 1</h3>
+                        <span class="exp-company">Euler Motors</span>
+                        <ul class="exp-points">
+                            <li>Developing and maintaining computer vision algorithms for ADAS systems including Lane Detection</li>
+                            <li>R&amp;D on rain detection sensor suite for automatic wiper activation</li>
+                            <li>Building night-vision systems for improved low-light vehicle visibility</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>OpenCV</span><span>ADAS</span><span>Lane Detection</span><span>Night Vision</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="exp-item interactive-card">
+                    <div class="exp-meta">
+                        <span class="exp-period">Jun 2024 — Dec 2024</span>
+                    </div>
+                    <div class="exp-body">
+                        <h3>Computer Vision Intern</h3>
+                        <span class="exp-company">Euler Motors</span>
+                        <ul class="exp-points">
+                            <li>Implemented Forward Collision Warning as part of the ADAS feature suite</li>
+                            <li>Deployed camera-based automation systems in the manufacturing plant</li>
+                            <li>Built Carla Simulator environments to validate ADAS features using Python and ROS</li>
+                        </ul>
+                        <div class="exp-tags">
+                            <span>Python</span><span>ROS</span><span>Carla</span><span>FCW</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="section section-reveal reveal-down">
+            <div class="section-header">
+                <span class="section-label">03 </span>
+                <h2 class="section-heading">Systems Research &amp; Builds</h2>
+            </div>
+
+            <div class="projects-grid">
+                <div class="project-card interactive-card">
+                    <div class="project-top">
+                        <span class="project-type">Mobile Robotics</span>
+                        <a href="https://github.com/RhithikRajK/AgricultureRover-WeedDetection-Removal-CropRecommendation-MobileRobot/tree/main" target="_blank" class="project-link-icon" aria-label="GitHub Source">
+                            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title">Autonomous Agriculture Rover</h3>
+                    <p class="project-description">End-to-end mobile automation featuring custom weed detection classification layers, hardware targeting removal mechanisms, and sensor crop analytics.</p>
                     <div class="project-video-wrapper">
                         <video src="bot_video.mp4" controls muted autoplay loop playsinline preload="metadata" class="project-video"></video>
                     </div>
                     <ul class="project-tech">
-                        <li>Embedded Control</li>
-                        <li>Bot Movement Demo</li>
+                        <li>Embedded C++</li><li>Computer Vision</li><li>Hardware Control</li>
                     </ul>
-                    <div class="project-links">
-                        <a href="https://github.com/RhithikRajK/AgricultureRover-WeedDetection-Removal-CropRecommendation-MobileRobot/tree/main" target="_blank">GitHub</a>
+                </div>
+
+                <div class="project-card project-paper interactive-card">
+                    <div class="project-top">
+                        <span class="project-type">NLP Research Publication</span>
+                        <a href="https://www.semanticscholar.org/paper/MAC-AI-Multilingual-%26-Automatic-Conversational-AI-SheikImam-RhithikRaj/bb7bc7f3841f06cb41f04d88f6bafd1670af598e" target="_blank" class="project-link-icon" aria-label="Read Paper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
                     </div>
+                    <h3 class="project-title">MAC-AI: Multilingual &amp; Automatic Conversational AI</h3>
+                    <p class="project-description">Conference paper detailing conversational system localization adaptation loops spanning non-homogenous input sequences.</p>
+                    <ul class="project-tech">
+                        <li>Transformers</li><li>NLP</li><li>Applied AI</li>
+                    </ul>
+                </div>
+
+                <div class="project-card project-paper interactive-card">
+                    <div class="project-top">
+                        <span class="project-type">ADAS Safety Publication</span>
+                        <a href="https://www.sciencedirect.com/science/article/pii/S1877050924008846" target="_blank" class="project-link-icon" aria-label="Read Paper">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15,3 21,3 21,9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </a>
+                    </div>
+                    <h3 class="project-title">Driver Distraction Prevention Tracking Engine</h3>
+                    <p class="project-description">Published in ScienceDirect — real-time predictive gaze classification models utilizing low-latency behavioral edge sets.</p>
+                    <ul class="project-tech">
+                        <li>Computer Vision</li><li>Gaze Mapping</li><li>Driver Safety</li>
+                    </ul>
                 </div>
             </div>
-            <div class="project-card">
-                <div class="project-content">
-                    <h3 class="project-title"><a href="https://www.semanticscholar.org/paper/MAC-AI-Multilingual-%26-Automatic-Conversational-AI-SheikImam-RhithikRaj/bb7bc7f3841f06cb41f04d88f6bafd1670af598e" target="_blank" rel="noopener">MAC-AI: Multilingual &amp; Automatic Conversational AI</a></h3>
-                    <p class="project-description">Conference paper co-authored by me. Follow the link to view the paper and details on Semantic Scholar.</p>
-                    <ul class="project-tech">
-                        <li>Conference Paper</li>
-                        <li>Multilingual Conversational AI</li>
-                    </ul>
-                </div>
-                </div>
-                <div class="project-card">
-                    <div class="project-content">
-                        <h3 class="project-title"><a href="https://www.sciencedirect.com/science/article/pii/S1877050924008846" target="_blank" rel="noopener">An Intelligent System for Preventing Accidents Due to Driver Distractions</a></h3>
-                        <p class="project-description">Conference paper co-authored by me.</p>
-                        <ul class="project-tech">
-                            <li>Conference Paper</li>
-                            <li>Published Research</li>
-                        </ul>
-                    </div>
-                </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="contact" class="section section-reveal reveal-pop contact-section">
-        <h2 class="section-heading">Get In Touch</h2>
-        <p>I'm currently looking for new opportunities! Whether you have a question or just want to say hi, my inbox is always open.</p>
-        <a href="mailto:rhithikraj2002@gmail.com" class="btn">Say Hello</a>
-    </section>
-    <footer class="footer">
-        <p>Designed & Built by Rhithik Raj K &copy; 2026</p>
-    </footer>
+        <section id="contact" class="section section-reveal reveal-pop contact-section">
+            <div class="section-label-center"> METRIC_ESTABLISHMENT</div>
+            <h2 class="contact-heading">Initiate Connection</h2>
+            <p class="contact-sub">Open to deployment loops spanning advanced computer vision architectures, vehicle robotics pipelines, and hardware accelerators.</p>
+            <a href="mailto:rhithikraj2002@gmail.com" class="btn contact-btn">Open Comms Link →</a>
+            <div class="contact-links">
+                <a href="https://github.com/RhithikRajK" target="_blank" rel="noopener">GitHub Network</a>
+                <a href="mailto:rhithikraj2002@gmail.com">Secure Mail Vector</a>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>System Architecture and Nodes Engineered by Rhithik Raj K &copy; 2026</p>
+        </footer>
+    </div>
 
     <script>
-        const revealSections = document.querySelectorAll('.section-reveal');
-        const navLogo = document.querySelector('.nav-logo');
-        const heroSection = document.querySelector('.hero');
-        const projectCards = document.querySelectorAll('.project-card');
+    (function () {
+        const intro = document.getElementById('space-intro');
+        const canvas = document.getElementById('space-bg');
+        const textWrap = document.getElementById('space-name-wrap');
+        const hint = document.getElementById('scroll-hint');
+        if (!intro || !canvas) return;
 
-        const updatePointerGlow = (event) => {
-            const x = (event.clientX / window.innerWidth) * 100;
-            const y = (event.clientY / window.innerHeight) * 100;
-            document.documentElement.style.setProperty('--pointer-x', `${x}%`);
-            document.documentElement.style.setProperty('--pointer-y', `${y}%`);
-        };
+        const ctx = canvas.getContext('2d');
+        let W, H, dpr;
+        let stars = [];
+        let particles = [];
+        let mouse = { x: -1000, y: -1000, targetRealX: -1000, targetRealY: -1000 };
+        let startTime = performance.now();
+        let introDuration = 2000; 
 
-        window.addEventListener('pointermove', updatePointerGlow, { passive: true });
-        window.addEventListener('mousemove', updatePointerGlow, { passive: true });
-
-        if (heroSection) {
-            const handleHeroMotion = (event) => {
-                const bounds = heroSection.getBoundingClientRect();
-                const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 10;
-                const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -10;
-                heroSection.style.setProperty('--hero-tilt-x', `${x}deg`);
-                heroSection.style.setProperty('--hero-tilt-y', `${y}deg`);
-            };
-
-            const updateEclipsePosition = () => {
-                const heroHeight = heroSection.offsetHeight;
-                const scrollWithinHero = Math.max(0, Math.min(window.scrollY, heroHeight));
-                const progress = Math.min(scrollWithinHero / (heroHeight * 0.85), 1);
-                const maxShift = window.innerWidth + 600; // ensures it exits to the right
-                const translate = progress * maxShift;
-                const scaleX = 1 + progress * 6.0; // stretch horizontally
-                const scaleY = Math.max(0.06, 1 - progress * 0.94); // squash vertically
-                const radius = 20 + (240 * (1 - progress)); // px, from large circle to small pill
-
-                heroSection.style.setProperty('--eclipse-translate', `${translate}px`);
-                heroSection.style.setProperty('--eclipse-scaleX', scaleX);
-                heroSection.style.setProperty('--eclipse-scaleY', scaleY);
-                heroSection.style.setProperty('--eclipse-radius', `${radius}px`);
-
-                if (progress >= 0.995) {
-                    if (!document.body.classList.contains('eclipse-exited')) {
-                        document.body.classList.add('eclipse-exited');
-                    }
-                } else {
-                    if (document.body.classList.contains('eclipse-exited')) {
-                        document.body.classList.remove('eclipse-exited');
-                    }
-                }
-            };
-
-            heroSection.addEventListener('pointermove', handleHeroMotion);
-            heroSection.addEventListener('mousemove', handleHeroMotion);
-
-            heroSection.addEventListener('pointerleave', () => {
-                heroSection.style.setProperty('--hero-tilt-x', '0deg');
-                heroSection.style.setProperty('--hero-tilt-y', '0deg');
-            });
-
-            window.addEventListener('scroll', () => requestAnimationFrame(updateEclipsePosition), { passive: true });
-            window.addEventListener('resize', () => requestAnimationFrame(updateEclipsePosition));
-            updateEclipsePosition();
-        }
-
-        const applyCardTilt = (card, event) => {
-            const bounds = card.getBoundingClientRect();
-            const x = ((event.clientX - bounds.left) / bounds.width - 0.5) * 8;
-            const y = ((event.clientY - bounds.top) / bounds.height - 0.5) * -8;
-            card.style.setProperty('--card-rotate-x', `${x}deg`);
-            card.style.setProperty('--card-rotate-y', `${y}deg`);
-            card.style.setProperty('--card-lift', 'translateY(-8px) scale(1.01)');
-        };
-
-        projectCards.forEach((card) => {
-            const handleCardMotion = (event) => applyCardTilt(card, event);
-
-            card.addEventListener('pointermove', handleCardMotion);
-            card.addEventListener('mousemove', handleCardMotion);
-            card.addEventListener('pointerleave', () => {
-                card.style.setProperty('--card-rotate-x', '0deg');
-                card.style.setProperty('--card-rotate-y', '0deg');
-                card.style.setProperty('--card-lift', 'translateY(0) scale(1)');
-            });
+        window.addEventListener('resize', resize);
+        window.addEventListener('mousemove', (e) => {
+            const rect = canvas.getBoundingClientRect();
+            mouse.targetRealX = e.clientX - rect.left;
+            mouse.targetRealY = e.clientY - rect.top;
+        });
+        window.addEventListener('mouseleave', () => {
+            mouse.targetRealX = -1000;
+            mouse.targetRealY = -1000;
         });
 
-        if (revealSections.length > 0 && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-            const sectionObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                        observer.unobserve(entry.target);
-                    }
+        function resize() {
+            dpr = window.devicePixelRatio || 1;
+            W = window.innerWidth; 
+            H = window.innerHeight;
+            canvas.width = Math.round(W * dpr);
+            canvas.height = Math.round(H * dpr);
+            canvas.style.width = W + 'px';
+            canvas.style.height = H + 'px';
+            ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            buildStars();
+            buildTextParticles();
+        }
+
+        function buildStars() {
+            stars = [];
+            const n = Math.min(450, Math.floor(W * H / 3500));
+            for (let i = 0; i < n; i++) {
+                stars.push({
+                    x: Math.random() * W,
+                    y: Math.random() * H,
+                    r: Math.random() * 1.6 + 0.3,
+                    a: Math.random() * 0.75 + 0.15,
+                    phase: Math.random() * Math.PI * 2,
+                    spd: Math.random() * 0.025 + 0.005
                 });
-            }, {
-                threshold: 0.18,
-                rootMargin: '0px 0px -10% 0px'
-            });
-
-            revealSections.forEach((section) => sectionObserver.observe(section));
-        } else {
-            revealSections.forEach((section) => section.classList.add('is-visible'));
+            }
         }
 
-        if (navLogo) {
-            const maxShift = 26;
+        function buildTextParticles() {
+            const off = document.createElement('canvas');
+            const fontSize = Math.min(W * 0.08, 86);
+            off.width = W;
+            off.height = Math.round(fontSize * 2.5);
+            const oc = off.getContext('2d');
+            
+            oc.fillStyle = '#fff';
+            oc.font = `800 ${fontSize}px "Inter", -apple-system, sans-serif`;
+            oc.textAlign = 'center';
+            oc.textBaseline = 'middle';
+            oc.fillText('RHITHIK RAJ K.', W / 2, off.height / 2);
 
-            const resetLogo = () => {
-                navLogo.style.transform = 'translateX(0)';
-            };
+            const img = oc.getImageData(0, 0, off.width, off.height);
+            const data = img.data;
+            const gap = Math.max(3, Math.round(W / 280));
+            particles = [];
 
-            navLogo.addEventListener('pointermove', (event) => {
-                const bounds = navLogo.getBoundingClientRect();
-                const pointerOffset = event.clientX - (bounds.left + bounds.width / 2);
-                const direction = pointerOffset >= 0 ? -1 : 1;
-                const strength = Math.min(Math.abs(pointerOffset), bounds.width / 2);
-                const shift = Math.round((strength / (bounds.width / 2)) * maxShift) * direction;
+            const startY = H / 2 - off.height / 2;
 
-                navLogo.style.transform = `translateX(${shift}px)`;
-            });
-
-            navLogo.addEventListener('mousemove', (event) => {
-                const bounds = navLogo.getBoundingClientRect();
-                const pointerOffset = event.clientX - (bounds.left + bounds.width / 2);
-                const direction = pointerOffset >= 0 ? -1 : 1;
-                const strength = Math.min(Math.abs(pointerOffset), bounds.width / 2);
-                const shift = Math.round((strength / (bounds.width / 2)) * maxShift) * direction;
-
-                navLogo.style.transform = `translateX(${shift}px)`;
-            });
-
-            navLogo.addEventListener('pointerleave', resetLogo);
-            navLogo.addEventListener('mouseleave', resetLogo);
-            navLogo.addEventListener('blur', resetLogo);
-        }
-
-        const demoVideo = document.querySelector('.project-video');
-        if (demoVideo) {
-            const videoObserver = new IntersectionObserver((entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting) {
-                        demoVideo.play().catch(() => {});
-                    } else if (!entry.isIntersecting) {
-                        demoVideo.pause();
+            for (let y = 0; y < off.height; y += gap) {
+                for (let x = 0; x < off.width; x += gap) {
+                    const idx = (y * off.width + x) * 4;
+                    if (data[idx + 3] > 120) {
+                        const angle = Math.random() * Math.PI * 2;
+                        const dist = Math.max(W, H) * (0.6 + Math.random() * 0.5);
+                        
+                        particles.push({
+                            sx: W / 2 + Math.cos(angle) * dist,
+                            sy: H / 2 + Math.sin(angle) * dist,
+                            tx: x,
+                            ty: startY + y,
+                            x: 0, y: 0,
+                            scatX: (x - W / 2) * (3.5 + Math.random() * 4.5) + W / 2,
+                            scatY: (startY + y - H / 2) * (3.5 + Math.random() * 4.5) + H / 2,
+                            size: Math.random() * 1.4 + 1.1
+                        });
                     }
-                });
-            }, {
-                threshold: 0.35,
-                rootMargin: '0px 0px -10% 0px'
-            });
-
-            videoObserver.observe(demoVideo);
-            demoVideo.addEventListener('mouseenter', () => demoVideo.play().catch(() => {}));
-            demoVideo.addEventListener('mouseleave', () => demoVideo.pause());
+                }
+            }
         }
 
-        /* Persistent eclipse section-driven animation */
-        (function() {
-            const eclipse = document.getElementById('eclipse');
-            const sectionsAll = Array.from(document.querySelectorAll('section'));
+        resize();
 
-            const clamp = (v, a=0, b=1) => Math.max(a, Math.min(b, v));
-            const lerp = (a, b, t) => a + (b - a) * t;
-
-            const presets = {
-                hero: () => ({ x: window.innerWidth * 0.72, y: window.innerHeight * 0.35, w: 520, h: 520, border: 12, opacity: 1, scaleX: 1, scaleY:1, radius: '50%' }),
-                about: () => ({ x: window.innerWidth * 0.88, y: window.innerHeight * 0.42, w: 640, h: 260, border: 10, opacity: 0.95, scaleX: 2.2, scaleY:0.36, radius: '22%' }),
-                experience: () => ({ x: window.innerWidth * 1.15, y: window.innerHeight * 0.5, w: 1100, h: 120, border: 10, opacity: 0.7, scaleX: 5, scaleY:0.08, radius: '12px' }),
-                projects: () => ({ x: window.innerWidth * 0.55, y: window.innerHeight * 0.6, w: 560, h: 560, border: 14, opacity: 1, scaleX:1, scaleY:1, radius:'50%' }),
-                contact: () => ({ x: window.innerWidth * 0.95, y: window.innerHeight * 0.8, w: 700, h: 180, border: 12, opacity: 0.9, scaleX:2.6, scaleY:0.24, radius:'18%' })
-            };
-
-            const getPresetFor = (id) => (presets[id] || presets.hero)();
-
-            let ticking = false;
-
-            function updateEclipse() {
-                ticking = false;
-                const scrollY = window.scrollY;
-                // find current section index based on midpoint of viewport
-                const mid = scrollY + window.innerHeight * 0.45;
-                let idx = 0;
-                for (let i = 0; i < sectionsAll.length; i++) {
-                    const top = sectionsAll[i].offsetTop;
-                    if (mid >= top) idx = i;
-                }
-
-                const current = sectionsAll[idx];
-                const next = sectionsAll[idx + 1] || current;
-                const curTop = current.offsetTop;
-                const curH = current.offsetHeight || window.innerHeight;
-                const progress = clamp((scrollY - curTop) / curH, 0, 1);
-
-                const curPreset = getPresetFor(current.id || 'hero');
-                const nextPreset = getPresetFor(next.id || current.id || 'hero');
-
-                const t = progress;
-                const state = {
-                    x: lerp(curPreset.x, nextPreset.x, t),
-                    y: lerp(curPreset.y, nextPreset.y, t),
-                    w: lerp(curPreset.w, nextPreset.w, t),
-                    h: lerp(curPreset.h, nextPreset.h, t),
-                    border: lerp(curPreset.border, nextPreset.border, t),
-                    opacity: lerp(curPreset.opacity, nextPreset.opacity, t),
-                    scaleX: lerp(curPreset.scaleX, nextPreset.scaleX, t),
-                    scaleY: lerp(curPreset.scaleY, nextPreset.scaleY, t),
-                    radius: t < 0.5 ? curPreset.radius : nextPreset.radius
-                };
-
-                // apply
-                eclipse.style.left = `${state.x}px`;
-                eclipse.style.top = `${state.y}px`;
-                eclipse.style.width = `${state.w}px`;
-                eclipse.style.height = `${state.h}px`;
-                eclipse.style.borderWidth = `${Math.max(1, Math.round(state.border))}px`;
-                eclipse.style.opacity = `${state.opacity}`;
-                eclipse.style.borderRadius = state.radius;
-                eclipse.style.transform = `translate(-50%,-50%) scaleX(${state.scaleX}) scaleY(${state.scaleY})`;
+        function loop(now) {
+            const elapsed = now - startTime;
+            const assembleProgress = Math.min(1, elapsed / introDuration);
+            
+            if (assembleProgress >= 1) {
+                textWrap.classList.add('active');
+                hint.classList.add('active');
+            } else {
+                textWrap.classList.remove('active');
+                hint.classList.remove('active');
             }
 
-            function requestUpdate() {
-                if (!ticking) {
-                    ticking = true;
-                    requestAnimationFrame(updateEclipse);
-                }
+            const st = window.scrollY;
+            const wh = window.innerHeight;
+            const scrollRatio = Math.min(1, st / wh);
+
+            ctx.clearRect(0, 0, W, H);
+
+            // Space Radial Background
+            const radialGrad = ctx.createRadialGradient(W/2, H/2, 10, W/2, H/2, Math.max(W,H)*0.6);
+            radialGrad.addColorStop(0, '#07040d');
+            radialGrad.addColorStop(0.5, '#030206');
+            radialGrad.addColorStop(1, '#010103');
+            ctx.fillStyle = radialGrad;
+            ctx.fillRect(0, 0, W, H);
+
+            // Ambient background dots
+            stars.forEach(s => {
+                s.phase += s.spd;
+                const alpha = Math.max(0.15, s.a + Math.sin(s.phase) * 0.2);
+                ctx.fillStyle = s.r > 1.2 ? `rgba(255, 65, 65, ${alpha})` : `rgba(240, 240, 255, ${alpha})`;
+                ctx.fillRect(s.x, s.y, s.r, s.r);
+            });
+
+            mouse.x += (mouse.targetRealX - mouse.x) * 0.12;
+            mouse.y += (mouse.targetRealY - mouse.y) * 0.12;
+
+            const pAlpha = Math.max(0, 1 - (scrollRatio * 1.4));
+            
+            if (pAlpha > 0) {
+                particles.forEach(p => {
+                    let curTargetX = p.sx + (p.tx - p.sx) * assembleProgress;
+                    let curTargetY = p.sy + (p.ty - p.sy) * assembleProgress;
+
+                    if (scrollRatio > 0) {
+                        curTargetX = curTargetX + (p.scatX - curTargetX) * scrollRatio;
+                        curTargetY = curTargetY + (p.scatY - curTargetY) * scrollRatio;
+                    }
+
+                    const dx = curTargetX - mouse.x;
+                    const dy = curTargetY - mouse.y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    const forceRadius = 120;
+
+                    if (dist < forceRadius) {
+                        const force = (forceRadius - dist) / forceRadius;
+                        const angle = Math.atan2(dy, dx);
+                        curTargetX += Math.cos(angle) * force * 50;
+                        curTargetY += Math.sin(angle) * force * 50;
+                    }
+
+                    p.x += (curTargetX - p.x) * 0.22;
+                    p.y += (curTargetY - p.y) * 0.22;
+
+                    ctx.fillStyle = `rgba(255, 255, 255, ${pAlpha * 0.95})`;
+                    ctx.fillRect(p.x, p.y, p.size, p.size);
+                });
             }
 
-            window.addEventListener('scroll', requestUpdate, { passive: true });
-            window.addEventListener('resize', () => { Object.keys(presets).forEach(k => presets[k]()); requestUpdate(); }, { passive: true });
-            // initial
-            requestUpdate();
-        })();
-
-        /* Starfield background animation (two layers + parallax) */
-        (function() {
-            const canvas = document.getElementById('stars');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let bgStars = [];
-            let fgStars = [];
-            let w = window.innerWidth;
-            let h = window.innerHeight;
-            let dpr = window.devicePixelRatio || 1;
-
-            function resize() {
-                w = window.innerWidth;
-                h = window.innerHeight;
-                dpr = window.devicePixelRatio || 1;
-                canvas.width = Math.max(1, Math.floor(w * dpr));
-                canvas.height = Math.max(1, Math.floor(h * dpr));
-                canvas.style.width = w + 'px';
-                canvas.style.height = h + 'px';
-                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-                createStars();
+            if (scrollRatio > 0) {
+                const outProgress = scrollRatio; 
+                textWrap.style.transform = `scale(${1 + outProgress * 0.35})`;
+                textWrap.style.opacity = Math.max(0, 1 - outProgress * 1.5);
+                hint.style.opacity = Math.max(0, 1 - outProgress * 2);
+                
+                intro.style.opacity = Math.max(0, 1 - scrollRatio * 1.1);
+                intro.style.pointerEvents = scrollRatio > 0.85 ? 'none' : 'auto';
+            } else {
+                if (assembleProgress >= 1) {
+                    textWrap.style.transform = 'scale(1)';
+                    textWrap.style.opacity = '1';
+                    hint.style.opacity = '1';
+                }
+                intro.style.opacity = '1';
+                intro.style.pointerEvents = 'auto';
             }
 
-            function createStars() {
-                bgStars = [];
-                fgStars = [];
-                const area = w * h;
-                const bgCount = Math.min(1200, Math.floor(area / 4000));
-                const fgCount = Math.min(220, Math.floor(area / 16000));
+            requestAnimationFrame(loop);
+        }
+        requestAnimationFrame(loop);
+    })();
 
-                for (let i = 0; i < bgCount; i++) {
-                    bgStars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 1.2 + 0.2, a: Math.random() * 0.9 + 0.05, phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.02 + 0.002 });
-                }
-                for (let i = 0; i < fgCount; i++) {
-                    fgStars.push({ x: Math.random() * w, y: Math.random() * h, r: Math.random() * 2.6 + 0.8, a: Math.random() * 0.9 + 0.2, phase: Math.random() * Math.PI * 2, speed: Math.random() * 0.02 + 0.005, hue: Math.random() * 40 - 10 });
-                }
-            }
 
-            let running = true;
-            function render() {
-                if (!running) return;
-                ctx.clearRect(0, 0, w, h);
-                const t = performance.now() * 0.001;
-                const scrollParallax = (window.scrollY / Math.max(1, document.body.scrollHeight - window.innerHeight));
-                const bgOffsetX = (scrollParallax - 0.5) * 40; // subtle horizontal parallax
-
-                // background stars (faint)
-                for (let i = 0; i < bgStars.length; i++) {
-                    const s = bgStars[i];
-                    s.phase += s.speed * 0.6;
-                    const flicker = 0.6 + 0.4 * Math.sin(s.phase + t * s.speed * 4);
-                    const alpha = Math.max(0, Math.min(1, s.a * flicker * 0.85));
-                    ctx.beginPath();
-                    ctx.fillStyle = `rgba(220,220,255,${alpha})`;
-                    ctx.arc(s.x + bgOffsetX * (s.r * 0.4), s.y, s.r, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-
-                // foreground stars (bigger, slightly colored)
-                for (let i = 0; i < fgStars.length; i++) {
-                    const s = fgStars[i];
-                    s.phase += s.speed * 0.4;
-                    const flicker = 0.55 + 0.45 * Math.sin(s.phase + t * s.speed * 3.5);
-                    const alpha = Math.max(0, Math.min(1, s.a * flicker));
-                    ctx.beginPath();
-                    const hue = 10 + (s.hue || 0);
-                    ctx.fillStyle = `hsla(${hue}, 90%, 75%, ${alpha})`;
-                    ctx.arc(s.x + bgOffsetX * (s.r * 0.65), s.y, s.r, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-
-                requestAnimationFrame(render);
-            }
-
-            window.addEventListener('resize', () => { resize(); });
-            window.addEventListener('visibilitychange', () => { running = document.visibilityState === 'visible'; if (running) requestAnimationFrame(render); });
-            resize();
-            requestAnimationFrame(render);
-        })();
-
-        /* Satellite cursor: draw SVG and animate smoothly to pointer */
-        (function() {
+    (function() {
             const sat = document.getElementById('sat-cursor');
             if (!sat) return;
 
@@ -518,243 +486,9 @@
             requestAnimationFrame(animate);
         })();
 
-            /* Floating logo -> nav transition */
-            (function(){
-                const floating = document.getElementById('floating-logo');
-                const bubble = document.getElementById('floating-bubble');
-                const navLogo = document.querySelector('.nav-logo');
-                const heroSection = document.querySelector('.hero');
-                if (!floating || !bubble || !navLogo || !heroSection) return;
 
-                let state = 'centered'; // 'centered' or 'in-nav' or 'moving'
-                let hasBurst = false;
-                let introActive = true;
-                floating.classList.add('centered');
-                document.body.classList.remove('logo-in-nav');
 
-                const initialTransform = () => {
-                    floating.style.transition = '';
-                    floating.style.transform = 'translate(-50%, -50%) scale(1)';
-                    floating.style.opacity = '1';
-                };
-
-                const openHero = () => {
-                    if (!introActive) return;
-                    introActive = false;
-                    bubble.classList.add('burst');
-                    bubble.classList.add('hidden');
-                    launchRocketFlight();
-                    spawnGlassShards(window.innerWidth / 2, window.innerHeight / 2, 22);
-                    setTimeout(() => {
-                        document.body.classList.remove('intro-active');
-                        document.body.classList.add('hero-visible');
-                    }, 220);
-                };
-
-                bubble.addEventListener('click', openHero);
-                bubble.addEventListener('keydown', (event) => {
-                    if (event.key === 'Enter' || event.key === ' ') {
-                        event.preventDefault();
-                        openHero();
-                    }
-                });
-
-                initialTransform();
-
-                let ticking = false;
-                function onScroll() {
-                    if (!ticking) {
-                        ticking = true;
-                        requestAnimationFrame(() => {
-                            const y = window.scrollY || window.pageYOffset;
-                            // auto-reveal hero if scrolling past threshold, even without burst
-                            if (y > 120 && introActive && document.body.classList.contains('intro-active')) {
-                                introActive = false;
-                                document.body.classList.remove('intro-active');
-                                document.body.classList.add('hero-visible');
-                            }
-                            if (y > 40 && state === 'centered') moveToNav();
-                            else if (y <= 40 && state === 'in-nav') moveToCenter();
-                            ticking = false;
-                        });
-                    }
-                }
-
-                function freezeCurrentTransform() {
-                    const computed = getComputedStyle(floating).transform;
-                    floating.style.transition = 'none';
-                    floating.style.transform = computed;
-                    void floating.offsetWidth;
-                }
-
-                function moveToNav(){
-                    state = 'moving';
-                    floating.classList.remove('centered');
-                    bubble.classList.add('hidden');
-                    const navRect = navLogo.getBoundingClientRect();
-                    const targetX = navRect.left + navRect.width / 2;
-                    const targetY = navRect.top + navRect.height / 2;
-                    const centerX = window.innerWidth / 2;
-                    const centerY = window.innerHeight / 2;
-                    const dx = targetX - centerX;
-                    const dy = targetY - centerY;
-                    const scale = Math.min(1, (navRect.width / floating.getBoundingClientRect().width) * 0.9);
-
-                    freezeCurrentTransform();
-                    floating.style.transition = 'transform 920ms cubic-bezier(0.25, 0.8, 0.35, 1), opacity 260ms ease';
-                    floating.style.transform = `translate(calc(-50% + ${dx}px), calc(-50% + ${dy}px)) scale(${scale})`;
-
-                    const onEnd = (event) => {
-                        if (event.propertyName !== 'transform') return;
-                        floating.removeEventListener('transitionend', onEnd);
-                        floating.style.opacity = '0';
-                        document.body.classList.add('logo-in-nav');
-                        if (!hasBurst) {
-                            hasBurst = true;
-                            const r = navLogo.getBoundingClientRect();
-                            spawnLogoBurst(r.left + r.width / 2, r.top + r.height / 2, 18, 14);
-                        }
-                        state = 'in-nav';
-                    };
-
-                    floating.addEventListener('transitionend', onEnd);
-                }
-
-                function moveToCenter(){
-                    state = 'moving';
-                    document.body.classList.remove('logo-in-nav');
-                    bubble.classList.remove('hidden');
-                    bubble.classList.remove('burst');
-                    introActive = true;
-                    freezeCurrentTransform();
-                    floating.style.display = '';
-                    floating.style.opacity = '1';
-                    floating.style.transition = 'transform 920ms cubic-bezier(0.25, 0.8, 0.35, 1), opacity 260ms ease';
-                    floating.style.transform = 'translate(-50%, -50%) scale(1)';
-
-                    const onEnd = (event) => {
-                        if (event.propertyName !== 'transform') return;
-                        floating.removeEventListener('transitionend', onEnd);
-                        floating.classList.add('centered');
-                        state = 'centered';
-                    };
-
-                    floating.addEventListener('transitionend', onEnd);
-                }
-
-                function spawnLogoBurst(x, y, baseDist = 32, count = 16){
-                    const container = document.createElement('div');
-                    container.className = 'logo-burst';
-                    document.body.appendChild(container);
-                    for (let i = 0; i < count; i++) {
-                        const d = document.createElement('div');
-                        d.className = 'burst-dot';
-                        const angle = Math.random() * Math.PI * 2;
-                        const dist = baseDist + Math.random() * baseDist;
-                        const tx = Math.cos(angle) * dist;
-                        const ty = Math.sin(angle) * dist - (Math.random() * 10);
-                        d.style.left = (x - 6) + 'px';
-                        d.style.top = (y - 6) + 'px';
-                        container.appendChild(d);
-                        requestAnimationFrame(() => {
-                            d.style.transform = `translate(${tx}px, ${ty}px) scale(${0.4 + Math.random() * 1.0})`;
-                            d.style.opacity = '0';
-                        });
-                    }
-                    setTimeout(() => { document.body.removeChild(container); }, 900);
-                }
-
-                function launchRocketFlight(){
-                    const layer = document.getElementById('rocket-layer');
-                    const contactSection = document.getElementById('contact');
-                    if (!layer || !contactSection) return;
-
-                    const bubbleRect = bubble.getBoundingClientRect();
-                    const startX = bubbleRect.left + bubbleRect.width / 2;
-                    const startY = bubbleRect.top + bubbleRect.height / 2;
-                    const targetRect = contactSection.getBoundingClientRect();
-                    const targetX = targetRect.left + targetRect.width * 0.5;
-                    const targetY = targetRect.top + targetRect.height * 0.16;
-                    const dx = targetX - startX;
-                    const dy = targetY - startY;
-                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
-
-                    const rocket = document.createElement('div');
-                    rocket.className = 'rocket-flight';
-                    rocket.innerHTML = `
-                        <span class="rocket-body"></span>
-                        <span class="rocket-flame"></span>
-                        <span class="rocket-trail"></span>
-                    `;
-                    rocket.style.left = `${startX}px`;
-                    rocket.style.top = `${startY}px`;
-                    rocket.style.setProperty('--rocket-angle', `${angle}deg`);
-                    rocket.style.setProperty('--rocket-dx', `${dx}px`);
-                    rocket.style.setProperty('--rocket-dy', `${dy}px`);
-                    layer.appendChild(rocket);
-
-                    requestAnimationFrame(() => {
-                        rocket.classList.add('active');
-                    });
-
-                    for (let i = 0; i < 12; i++) {
-                        const spark = document.createElement('span');
-                        spark.className = 'rocket-spark';
-                        spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 140}px`);
-                        spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 120}px`);
-                        spark.style.setProperty('--spark-delay', `${Math.random() * 120}ms`);
-                        rocket.appendChild(spark);
-                    }
-
-                    setTimeout(() => rocket.remove(), 1500);
-                }
-
-                function spawnGlassShards(x, y, count = 20){
-                    const container = document.createElement('div');
-                    container.className = 'logo-burst';
-                    document.body.appendChild(container);
-                    for (let i = 0; i < count; i++) {
-                        const shard = document.createElement('div');
-                        shard.className = 'shard-piece';
-                        const w = 12 + Math.random() * 24;
-                        const h = 14 + Math.random() * 42;
-                        shard.style.width = `${w}px`;
-                        shard.style.height = `${h}px`;
-                        shard.style.left = `${x - w / 2}px`;
-                        shard.style.top = `${y - h / 2}px`;
-                        shard.style.transform = `rotate(${Math.random() * 360}deg)`;
-                        const opacity = 0.45 + Math.random() * 0.4;
-                        shard.style.opacity = opacity;
-                        shard.style.background = `linear-gradient(${120 + Math.random() * 40}deg, rgba(255,255,255,0.95), rgba(255,255,255,0.12) 68%)`;
-                        shard.style.border = `1px solid rgba(255,255,255,${0.5 + Math.random() * 0.2})`;
-                        container.appendChild(shard);
-
-                        const angle = Math.random() * Math.PI * 2;
-                        const distance = 80 + Math.random() * 140;
-                        const tx = Math.cos(angle) * distance;
-                        const ty = Math.sin(angle) * distance + 40;
-                        const rotation = 25 + Math.random() * 120;
-                        const scale = 0.35 + Math.random() * 0.85;
-
-                        requestAnimationFrame(() => {
-                            shard.style.transform = `translate(${tx}px, ${ty}px) rotate(${rotation}deg) scale(${scale})`;
-                            shard.style.opacity = '0';
-                        });
-                    }
-                    setTimeout(() => { document.body.removeChild(container); }, 1200);
-                }
-
-                window.addEventListener('scroll', onScroll, { passive: true });
-                window.addEventListener('resize', () => {
-                    if (state === 'in-nav') {
-                        document.body.classList.add('logo-in-nav');
-                        floating.style.opacity = '0';
-                    }
-                }, { passive: true });
-            })();
-
-        /* Cursor trail: small fading particles behind the satellite */
-        (function(){
+    (function(){
             const trailContainer = document.getElementById('cursor-trail');
             if (!trailContainer) return;
             const dots = [];
@@ -785,106 +519,135 @@
             }, { passive: true });
         })();
 
-        /* Comets layer and subtle section parallax */
-        (function(){
-            const canvas = document.getElementById('comets');
-            if (!canvas) return;
-            const ctx = canvas.getContext('2d');
-            let w = window.innerWidth;
-            let h = window.innerHeight;
-            let dpr = window.devicePixelRatio || 1;
-            let comets = [];
-            let lastSpawn = 0;
+    /* ══════════════════════════════════════════════════════
+       MAIN FLYING SPACE STARS & COMETS ENGINE
+       ══════════════════════════════════════════════════════ */
+    (function(){
+        const canvas = document.getElementById('stars');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d');
+        let w=window.innerWidth, h=window.innerHeight;
+        canvas.width=w; canvas.height=h;
 
-            function resize() {
-                w = window.innerWidth;
-                h = window.innerHeight;
-                dpr = window.devicePixelRatio || 1;
-                canvas.width = Math.max(1, Math.floor(w * dpr));
-                canvas.height = Math.max(1, Math.floor(h * dpr));
-                canvas.style.width = w + 'px';
-                canvas.style.height = h + 'px';
-                ctx.setTransform(dpr,0,0,dpr,0,0);
-            }
+        let flyingStars = [];
+        const count = 120;
 
-            function spawnComet() {
-                const side = Math.random() < 0.5 ? -1 : 1; // left or right
-                const y = Math.random() * h * 0.7 + h * 0.05;
-                const speed = 800 + Math.random() * 1000; // px/sec
-                const angle = (Math.random() * 0.35 + 0.05) * (side * -1); // slightly downward
-                const vx = speed * Math.cos(angle) * (side * -1);
-                const vy = speed * Math.sin(angle);
-                const length = 80 + Math.random() * 220;
-                comets.push({ x: side < 0 ? -100 : w + 100, y, vx, vy, length, life: 0, maxLife: 3000 + Math.random()*1600 });
-            }
+        for(let i=0; i<count; i++) {
+            flyingStars.push({
+                x: Math.random() * w,
+                y: Math.random() * h,
+                size: Math.random() * 1.8 + 0.4,
+                speed: Math.random() * 35 + 8,
+                alpha: Math.random() * 0.6 + 0.2
+            });
+        }
 
-            function update(dt){
-                for (let i = comets.length-1; i >=0; i--) {
-                    const c = comets[i];
-                    c.x += c.vx * dt;
-                    c.y += c.vy * dt;
-                    c.life += dt*1000;
-                    if (c.x < -600 || c.x > w + 600 || c.y > h + 600 || c.life > c.maxLife) comets.splice(i,1);
+        window.addEventListener('resize', () => {
+            w=window.innerWidth; h=window.innerHeight;
+            canvas.width=w; canvas.height=h;
+        });
+
+        const cCanvas = document.getElementById('comets');
+        if(!cCanvas) return;
+        const cCtx = cCanvas.getContext('2d');
+        cCanvas.width=w; cCanvas.height=h;
+        window.addEventListener('resize', () => { cCanvas.width=w; cCanvas.height=h; });
+
+        let comets = [];
+        let lastSpawn = performance.now();
+
+        function spawnComet(){
+            const angle = Math.PI * 0.75 + (Math.random() - 0.5) * 0.12;
+            const speed = 280 + Math.random()*260;
+            comets.push({
+                x: Math.random()*w*1.2 - w*0.2, y: -50,
+                vx: Math.cos(angle)*speed, vy: Math.sin(angle)*speed,
+                life: 0, maxLife: 2000 + Math.random()*1500
+            });
+        }
+
+        let lastT = performance.now();
+        function loop(now){
+            const dt = (now - lastT)/1000; lastT=now;
+
+            // Clear Background Canvas Layers
+            ctx.clearRect(0,0,w,h);
+
+            // Animate and Paint continuous Flying Hyper Space Stars
+            flyingStars.forEach(s => {
+                s.x += s.speed * dt;
+                // Seamlessly Wrap around view borders
+                if(s.x > w) {
+                    s.x = -10;
+                    s.y = Math.random() * h;
                 }
+                ctx.fillStyle = s.size > 1.4 ? `rgba(255, 80, 80, ${s.alpha})` : `rgba(255, 255, 255, ${s.alpha})`;
+                ctx.fillRect(s.x, s.y, s.size, s.size);
+            });
+
+            if(now - lastSpawn > 2500 + Math.random()*3000){
+                spawnComet(); lastSpawn=now;
             }
 
-            function render(){
-                ctx.clearRect(0,0,w,h);
-                ctx.globalCompositeOperation = 'lighter';
-                for (let i = 0; i < comets.length; i++){
-                    const c = comets[i];
-                    const t = Math.max(0, 1 - c.life / c.maxLife);
-                    const grad = ctx.createLinearGradient(c.x, c.y, c.x - c.vx * 0.02, c.y - c.vy * 0.02);
-                    grad.addColorStop(0, `rgba(255,255,255,${0.95*t})`);
-                    grad.addColorStop(0.4, `rgba(255,180,160,${0.6*t})`);
-                    grad.addColorStop(1, `rgba(255,80,60,${0.0})`);
-                    ctx.strokeStyle = grad;
-                    ctx.lineWidth = Math.max(1, Math.min(18, c.length * 0.06));
-                    ctx.lineCap = 'round';
-                    ctx.beginPath();
-                    ctx.moveTo(c.x, c.y);
-                    ctx.lineTo(c.x - c.vx * 0.03, c.y - c.vy * 0.03);
-                    ctx.stroke();
-                    // head glow
-                    ctx.beginPath();
-                    ctx.fillStyle = `rgba(255,220,200,${0.9*t})`;
-                    ctx.arc(c.x, c.y, Math.max(2, ctx.lineWidth*0.8), 0, Math.PI*2);
-                    ctx.fill();
-                }
-                ctx.globalCompositeOperation = 'source-over';
-            }
+            cCtx.clearRect(0,0,w,h);
+            comets = comets.filter(c => {
+                c.x += c.vx * dt;
+                c.y += c.vy * dt;
+                c.life += dt * 1000;
+                
+                const ratio = Math.max(0, 1 - c.life/c.maxLife);
+                const g = cCtx.createLinearGradient(c.x, c.y, c.x - c.vx*0.06, c.y - c.vy*0.06);
+                g.addColorStop(0, `rgba(255, 80, 80, ${0.8 * ratio})`);
+                g.addColorStop(1, 'rgba(255, 40, 40, 0)');
+                cCtx.strokeStyle = g;
+                cCtx.lineWidth = 1.5;
+                cCtx.beginPath();
+                cCtx.moveTo(c.x, c.y);
+                cCtx.lineTo(c.x - c.vx*0.06, c.y - c.vy*0.06);
+                cCtx.stroke();
 
-            let lastT = performance.now();
-            function loop(now){
-                const dt = Math.min(0.06, (now - lastT) / 1000);
-                lastT = now;
-                // spawn occasionally
-                if (now - lastSpawn > 800 + Math.random()*2000) { spawnComet(); lastSpawn = now; }
-                update(dt);
-                render();
-                requestAnimationFrame(loop);
-            }
-
-            // subtle parallax for sections
-            const parallaxEls = Array.from(document.querySelectorAll('header.hero, section'));
-            function updateParallax(){
-                const mid = window.innerHeight/2;
-                parallaxEls.forEach((el, i) => {
-                    const depth = (el.dataset.depth ? Number(el.dataset.depth) : (i===0?0.02:0.01));
-                    const rect = el.getBoundingClientRect();
-                    const t = (rect.top - mid);
-                    const y = -(t * depth);
-                    el.style.transform = `translate3d(0, ${y}px, 0)`;
-                });
-            }
-
-            window.addEventListener('resize', () => { resize(); });
-            window.addEventListener('scroll', () => { requestAnimationFrame(updateParallax); }, { passive:true });
-            resize();
+                return c.life < c.maxLife && c.y < h + 50;
+            });
             requestAnimationFrame(loop);
-            requestAnimationFrame(updateParallax);
-        })();
-    </script>
+        }
+        requestAnimationFrame(loop);
+    })();
 
+    /* ══════════════════════════════════════════════════════
+       INTERACTIVE ELEMENT MOTION CORES (MOUSEOVER CORNER GLOW & TILT)
+       ══════════════════════════════════════════════════════ */
+    document.querySelectorAll('.interactive-card').forEach(card => {
+        card.addEventListener('mousemove', e => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Map tilt rotations based on axis placement percentages
+            const xc = rect.width / 50;
+            const yc = rect.height / 50;
+            const tiltX = (yc - y) / 100;
+            const tiltY = (x - xc) / 100;
+
+            card.style.setProperty('--mouse-x', `${x}px`);
+            card.style.setProperty('--mouse-y', `${y}px`);
+            card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) translateY(-4px)`;
+        });
+
+        card.addEventListener('mouseleave', () => {
+            card.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) translateY(0px)';
+        });
+    });
+
+    const revealElems = document.querySelectorAll('.section-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+            }
+        });
+    }, { threshold: 0.1, rootMargin: "0px 0px -40px 0px" });
+    
+    revealElems.forEach(el => revealObserver.observe(el));
+    </script>
 </body>
 </html>
