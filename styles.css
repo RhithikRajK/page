@@ -327,6 +327,114 @@ body.logo-in-nav .nav-logo {
     outline: none;
 }
 
+#rocket-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 10025;
+    overflow: visible;
+}
+
+.rocket-flight {
+    position: absolute;
+    width: 56px;
+    height: 92px;
+    left: 0;
+    top: 0;
+    transform: translate(-50%, -50%) rotate(var(--rocket-angle, -24deg));
+    opacity: 0;
+    transition: opacity 180ms ease, transform 1.35s cubic-bezier(0.16, 1, 0.3, 1);
+    filter: drop-shadow(0 0 18px rgba(255, 80, 80, 0.3));
+}
+
+.rocket-flight.active {
+    opacity: 1;
+    transform: translate(calc(-50% + var(--rocket-dx, 0px)), calc(-50% + var(--rocket-dy, 0px))) rotate(calc(var(--rocket-angle, -24deg) + 4deg));
+}
+
+.rocket-body {
+    position: absolute;
+    inset: 0;
+    border-radius: 48% 48% 44% 44%;
+    background: linear-gradient(145deg, rgba(255,255,255,0.96), rgba(255,255,255,0.16) 46%, rgba(255, 80, 80, 0.75) 100%);
+    border: 1px solid rgba(255,255,255,0.4);
+    box-shadow: inset 0 0 16px rgba(255,255,255,0.3), 0 14px 40px rgba(255, 32, 32, 0.2);
+}
+
+.rocket-body::before {
+    content: '';
+    position: absolute;
+    left: 50%;
+    top: 12px;
+    width: 20px;
+    height: 20px;
+    transform: translateX(-50%);
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,255,255,0.16));
+    box-shadow: 0 0 12px rgba(255,255,255,0.4);
+}
+
+.rocket-body::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 10px;
+    width: 20px;
+    height: 22px;
+    transform: translateX(-50%);
+    border-radius: 0 0 10px 10px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.35), rgba(255,255,255,0.03));
+}
+
+.rocket-flame {
+    position: absolute;
+    left: 50%;
+    bottom: -16px;
+    width: 20px;
+    height: 44px;
+    transform: translateX(-50%);
+    border-radius: 0 0 14px 14px;
+    background: linear-gradient(180deg, #ffe4ab 0%, #ff7c3f 35%, #ff2d2d 70%, transparent 100%);
+    filter: blur(1px);
+    animation: rocketFlame 120ms ease-in-out infinite alternate;
+}
+
+.rocket-trail {
+    position: absolute;
+    left: 50%;
+    top: 48px;
+    width: 5px;
+    height: 90px;
+    transform: translateX(-50%);
+    background: linear-gradient(180deg, rgba(255,255,255,0.55), rgba(255, 110, 80, 0.2) 35%, transparent 100%);
+    filter: blur(1px);
+    opacity: 0.8;
+}
+
+.rocket-spark {
+    position: absolute;
+    left: 50%;
+    top: 48px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255,255,255,0.95), rgba(255,120,80,0.4));
+    transform: translate(-50%, -50%) translate(var(--spark-x), var(--spark-y));
+    opacity: 0;
+    animation: rocketSpark 0.7s ease-out forwards;
+    animation-delay: var(--spark-delay, 0ms);
+}
+
+@keyframes rocketFlame {
+    from { transform: translateX(-50%) scaleY(0.9); }
+    to { transform: translateX(-50%) scaleY(1.15); }
+}
+
+@keyframes rocketSpark {
+    0% { opacity: 0.9; transform: translate(-50%, -50%) translate(var(--spark-x), var(--spark-y)) scale(0.7); }
+    100% { opacity: 0; transform: translate(-50%, -50%) translate(calc(var(--spark-x) * 1.4), calc(var(--spark-y) * 1.4)) scale(1.2); }
+}
+
 .shard-piece {
     position: absolute;
     background: linear-gradient(160deg, rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.18));
@@ -452,51 +560,18 @@ body.hero-visible .hero {
 }
 
 .hero::before {
-    content: "";
-    position: absolute;
-    left: 50%;
-    top: 12%;
-    width: 480px;
-    height: 480px;
-    transform: translateX(calc(-50% + var(--eclipse-translate, 0px))) scaleX(var(--eclipse-scaleX, 1)) scaleY(var(--eclipse-scaleY, 1));
-    border-radius: var(--eclipse-radius, 50%);
-    border: 12px solid rgba(255, 32, 32, 0.95);
-    box-shadow: 0 0 140px rgba(255, 32, 32, 0.4), inset 0 0 80px rgba(255, 32, 32, 0.14);
-    background: radial-gradient(circle, rgba(255, 32, 32, 0.14), transparent 52%);
-    filter: blur(0.5px);
-    animation: floatGlow 9s ease-in-out infinite;
-    transition: transform 420ms cubic-bezier(.2,.9,.2,1), border-radius 420ms cubic-bezier(.2,.9,.2,1);
-    pointer-events: none;
-    z-index: 0;
+    content: none;
 }
 
-/* Persistent eclipse element that follows scrolling */
 #eclipse {
-    position: fixed;
-    left: 50%;
-    top: 30%;
-    width: 480px;
-    height: 480px;
-    transform: translate(-50%, -50%) translateX(0px) translateY(0px) scaleX(1) scaleY(1);
-    border-radius: 50%;
-    border: 12px solid rgba(255, 32, 32, 0.95);
-    box-shadow: 0 0 140px rgba(255, 32, 32, 0.4), inset 0 0 80px rgba(255, 32, 32, 0.14);
-    background: radial-gradient(circle, rgba(255, 32, 32, 0.12), transparent 52%);
-    pointer-events: none;
-    z-index: 0;
-    transition: transform 420ms cubic-bezier(.2,.9,.2,1), width 420ms cubic-bezier(.2,.9,.2,1), height 420ms cubic-bezier(.2,.9,.2,1), border-radius 420ms cubic-bezier(.2,.9,.2,1), opacity 420ms ease;
-    opacity: 1;
+    display: none;
 }
 
-/* ensure main content sits above the eclipse */
 header.hero, section, .nav-container {
     position: relative;
     z-index: 2;
     will-change: transform;
 }
-
-/* hide hero pseudo since we use persistent eclipse */
-.hero::before { display: none; }
 
 /* Starfield canvas behind everything */
 #stars {

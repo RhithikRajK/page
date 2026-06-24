@@ -33,6 +33,7 @@
 
     <div id="floating-bubble" role="button" tabindex="0" aria-label="Reveal hero section"></div>
     <div id="floating-logo" aria-hidden="true">RJ</div>
+    <div id="rocket-layer" aria-hidden="true"></div>
 
     <header class="hero">
         <div class="hero-content">
@@ -542,6 +543,7 @@
                     introActive = false;
                     bubble.classList.add('burst');
                     bubble.classList.add('hidden');
+                    launchRocketFlight();
                     spawnGlassShards(window.innerWidth / 2, window.innerHeight / 2, 22);
                     setTimeout(() => {
                         document.body.classList.remove('intro-active');
@@ -660,6 +662,51 @@
                         });
                     }
                     setTimeout(() => { document.body.removeChild(container); }, 900);
+                }
+
+                function launchRocketFlight(){
+                    const layer = document.getElementById('rocket-layer');
+                    const contactSection = document.getElementById('contact');
+                    if (!layer || !contactSection) return;
+
+                    const bubbleRect = bubble.getBoundingClientRect();
+                    const startX = bubbleRect.left + bubbleRect.width / 2;
+                    const startY = bubbleRect.top + bubbleRect.height / 2;
+                    const targetRect = contactSection.getBoundingClientRect();
+                    const targetX = targetRect.left + targetRect.width * 0.5;
+                    const targetY = targetRect.top + targetRect.height * 0.16;
+                    const dx = targetX - startX;
+                    const dy = targetY - startY;
+                    const angle = Math.atan2(dy, dx) * 180 / Math.PI;
+
+                    const rocket = document.createElement('div');
+                    rocket.className = 'rocket-flight';
+                    rocket.innerHTML = `
+                        <span class="rocket-body"></span>
+                        <span class="rocket-flame"></span>
+                        <span class="rocket-trail"></span>
+                    `;
+                    rocket.style.left = `${startX}px`;
+                    rocket.style.top = `${startY}px`;
+                    rocket.style.setProperty('--rocket-angle', `${angle}deg`);
+                    rocket.style.setProperty('--rocket-dx', `${dx}px`);
+                    rocket.style.setProperty('--rocket-dy', `${dy}px`);
+                    layer.appendChild(rocket);
+
+                    requestAnimationFrame(() => {
+                        rocket.classList.add('active');
+                    });
+
+                    for (let i = 0; i < 12; i++) {
+                        const spark = document.createElement('span');
+                        spark.className = 'rocket-spark';
+                        spark.style.setProperty('--spark-x', `${(Math.random() - 0.5) * 140}px`);
+                        spark.style.setProperty('--spark-y', `${(Math.random() - 0.5) * 120}px`);
+                        spark.style.setProperty('--spark-delay', `${Math.random() * 120}ms`);
+                        rocket.appendChild(spark);
+                    }
+
+                    setTimeout(() => rocket.remove(), 1500);
                 }
 
                 function spawnGlassShards(x, y, count = 20){
