@@ -28,11 +28,17 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
+img,
+video,
+canvas {
+    max-width: 100%;
+}
+
 /* ═══════════════════════════════════════════════════════
    SPACE INTRO ENGINE SYSTEM LAYERS
    ═══════════════════════════════════════════════════════ */
 #space-intro-sentinel {
-    height: 100vh;
+    height: 100svh;
     width: 100%;
     pointer-events: none;
     position: relative;
@@ -76,9 +82,11 @@ body {
     font-family: var(--font);
     font-weight: 800;
     font-size: clamp(2.2rem, 7.5vw, 5.6rem);
-    letter-spacing: 0.15em;
+    letter-spacing: 0.11em;
     color: #ffffff;
     text-shadow: 0 0 45px rgba(255, 51, 51, 0.4);
+    text-align: center;
+    padding: 0 1rem;
 }
 
 #space-name-sub {
@@ -373,6 +381,11 @@ input, textarea, select, button, a {
 .signal-card-small { right: -2%; top: 45%; }
 .signal-card-bottom { bottom: 5%; left: 10%; }
 
+.interactive-card {
+    transform-style: preserve-3d;
+    transition: transform 0.25s ease;
+}
+
 /* ═══════════════════════════════════════════════════════
    BUTTON INTERACTION PATTERNS
    ═══════════════════════════════════════════════════════ */
@@ -474,12 +487,195 @@ input, textarea, select, button, a {
 .section-reveal.revealed { opacity: 1; transform: translate(0) scale(1); }
 
 @media (max-width: 900px) {
-    .hero-grid, .about-grid { grid-template-columns: 1fr; gap: 3rem; }
-    .hero-visual { order: -1; margin-bottom: 2rem; }
-    .exp-item { grid-template-columns: 1fr; gap: 0.6rem; }
+    .nav-container,
+    .hero-content,
+    .section {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 2.5rem;
+    }
+
+    .hero-grid,
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+    }
+
+    .hero-copy {
+        text-align: center;
+    }
+
+    .hero-description {
+        margin: 0 auto;
+    }
+
+    .hero-actions {
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+
+    .hero-visual {
+        order: -1;
+        margin-bottom: 2rem;
+        min-height: 320px;
+    }
+
+    .radar-display {
+        width: min(72vw, 320px);
+    }
+
+    .signal-card {
+        max-width: 50vw;
+    }
+
     .signal-card-main { left: 0; }
+    .exp-item { grid-template-columns: 1fr; gap: 0.6rem; }
+
+    .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .contact-links {
+        flex-wrap: wrap;
+        gap: 1.2rem 2rem;
+    }
 }
 @media (max-width: 650px) {
     .navbar .nav-links { display: none; }
     .hero-proof { grid-template-columns: 1fr; gap: 1.2rem; }
+
+    body {
+        cursor: auto;
+    }
+
+    #sat-cursor,
+    #cursor-trail {
+        display: none;
+    }
+
+    .navbar {
+        height: 64px;
+    }
+
+    .nav-container {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .hero-content,
+    .section {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+
+    .hero {
+        padding-top: 2rem;
+        padding-bottom: 4rem;
+    }
+
+    .hero-title {
+        font-size: clamp(2rem, 11vw, 2.8rem);
+    }
+
+    .hero-tagline {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+    }
+
+    #space-name-top {
+        letter-spacing: 0.07em;
+        font-size: clamp(1.45rem, 9.8vw, 2.7rem);
+        padding: 0 0.9rem;
+    }
+
+    #space-name-sub {
+        margin-top: 1rem;
+        letter-spacing: 0.16em;
+        line-height: 1.45;
+        padding: 0 0.9rem;
+        font-size: clamp(0.56rem, 2.8vw, 0.68rem);
+    }
+
+    #space-name-line {
+        margin-top: 1rem;
+        width: min(74vw, 300px);
+    }
+
+    #scroll-hint {
+        bottom: 2.1rem;
+    }
+
+    .radar-display {
+        width: min(84vw, 290px);
+    }
+
+    .signal-card {
+        position: static;
+        width: 100%;
+        max-width: none;
+        margin-top: 0.7rem;
+    }
+
+    .hero-visual {
+        display: grid;
+        justify-items: center;
+        gap: 0.2rem;
+        min-height: auto;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-card {
+        padding: 1.25rem;
+    }
+
+    .contact-section {
+        padding-top: 6rem;
+        padding-bottom: 6rem;
+    }
+
+    .contact-heading {
+        font-size: clamp(1.7rem, 8vw, 2.2rem);
+    }
+
+    .footer {
+        padding-left: 1rem;
+        padding-right: 1rem;
+    }
+}
+
+@media (min-width: 651px) and (max-width: 1024px) {
+    .hero-grid {
+        gap: 2.5rem;
+        grid-template-columns: 1fr;
+    }
+
+    .hero-copy {
+        text-align: center;
+    }
+
+    .hero-actions {
+        justify-content: center;
+    }
+
+    .hero-description {
+        margin: 0 auto;
+    }
+
+    .hero-visual {
+        min-height: 360px;
+    }
+
+    .radar-display {
+        width: min(52vw, 340px);
+    }
+
+    .projects-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
